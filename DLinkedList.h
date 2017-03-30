@@ -147,7 +147,7 @@ dType DLinkedList<dType>::deletePos(dType key)
 
 		if(curr == NULL)
 		{
-			return NULL;
+			return -1;
 		}
 	}
 	
@@ -183,13 +183,11 @@ int DLinkedList<dType>::find(dType d)
 {
 	if(!isEmpty())
 	{
-		int index = -1;
+		int index = 1;
 		ListNode<dType> *curr = front;
 
 		while(curr->next != NULL)
 		{
-			++index;
-
 			if(curr->data == d)
 			{
 				break;
@@ -197,6 +195,7 @@ int DLinkedList<dType>::find(dType d)
 			else
 			{
 				curr = curr->next;
+				++index;
 			}
 		}
 		return index;
