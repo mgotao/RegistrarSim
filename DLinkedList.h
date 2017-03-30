@@ -7,8 +7,8 @@ template<class dType>
 class DLinkedList
 {
 	private:
-		ListNode *front;
-		ListNode *back;
+		ListNode<dType> *front;
+		ListNode<dType> *back;
 		unsigned int size;
 	public:
 		DLinkedList();
@@ -21,9 +21,9 @@ class DLinkedList
 
 		dType removeFront();
 		dType removeBack();
-		dType deletePos(int key);
+		dType deletePos(dType key);
 
-		dType find(dType data);
+		int find(dType data);
 		int getSize();
 		void printList();
 };
@@ -51,7 +51,7 @@ bool DLinkedList<dType>::isEmpty()
 template<class dType>
 void DLinkedList<dType>::insertFront(dType data)
 {
-	ListNode* node = new ListNode(data);
+	ListNode<dType> *node = new ListNode<dType>(data);
 
 	if(isEmpty())
 	{
@@ -70,7 +70,7 @@ void DLinkedList<dType>::insertFront(dType data)
 template<class dType>
 void DLinkedList<dType>::insertBack(dType data)
 {
-	ListNode* node = new ListNode(data);
+	ListNode<dType> *node = new ListNode<dType>(data);
 
 	if(isEmpty())
 	{
@@ -91,7 +91,7 @@ dType DLinkedList<dType>::removeFront()
 {
 	if(!isEmpty())
 	{
-		ListNode *temp = front;
+		ListNode<dType> *temp = front;
 
 		if(front->next == NULL)
 		{
@@ -116,7 +116,7 @@ dType DLinkedList<dType>::removeBack()
 {
 	if(!isEmpty())
 	{
-		ListNode *temp = front;
+		ListNode<dType> *temp = front;
 
 		if(back->prev == NULL)
 		{
@@ -139,7 +139,7 @@ dType DLinkedList<dType>::removeBack()
 template<class dType>
 dType DLinkedList<dType>::deletePos(dType key)
 {
-	ListNode *curr = front;
+	ListNode<dType> *curr = front;
 
 	while(curr->data != key)
 	{
@@ -150,7 +150,7 @@ dType DLinkedList<dType>::deletePos(dType key)
 			return NULL;
 		}
 	}
-	w
+	
 	//check if front
 	if(curr == front)
 	{
@@ -184,8 +184,7 @@ int DLinkedList<dType>::find(dType d)
 	if(!isEmpty())
 	{
 		int index = -1;
-
-		ListNode *curr = front;
+		ListNode<dType> *curr = front;
 
 		while(curr->next != NULL)
 		{
@@ -200,13 +199,12 @@ int DLinkedList<dType>::find(dType d)
 				curr = curr->next;
 			}
 		}
+		return index;
 	}
-
-	return index;
 }
 
 template<class dType>
-int DLinkedList<dtype>::getSize()
+int DLinkedList<dType>::getSize()
 {
 	return size;
 }
@@ -214,7 +212,7 @@ int DLinkedList<dtype>::getSize()
 template<class dType>
 void DLinkedList<dType>::printList()
 {
-	ListNode *curr = front;
+	ListNode<dType> *curr = front;
 
 	while(curr->next != NULL)
 	{
