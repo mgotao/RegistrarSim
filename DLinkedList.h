@@ -10,11 +10,13 @@ class DLinkedList
 		ListNode<dType> *front;
 		ListNode<dType> *back;
 		unsigned int size;
+		
 	public:
 		DLinkedList();
 		~DLinkedList();
 
 		bool isEmpty();
+		dType peek();
 
 		void insertFront(dType data);
 		void insertBack(dType data);
@@ -46,6 +48,11 @@ template<class dType>
 bool DLinkedList<dType>::isEmpty()
 {
 	return(size == 0);
+}
+
+template<class dType>
+dType DLinkedList<dType>::peek(){
+	return front->data;	
 }
 
 template<class dType>
