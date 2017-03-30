@@ -6,8 +6,8 @@ class ListNode
 {
 	private:
 		dType data;
-		ListNode* prev;
-		ListNode* next;
+		ListNode<dType> *prev;
+		ListNode<dType> *next;
 
 		ListNode();
 		ListNode(dType data);
@@ -17,7 +17,13 @@ class ListNode
 };
 
 template<class dType>
-ListNode<dType>::ListNode(dType d)
+ListNode<dType>::ListNode<dType>()
+{
+
+}
+
+template<class dType>
+ListNode<dType>::ListNode<dType>(dType d)
 {
 	data = d;
 	next = NULL;
