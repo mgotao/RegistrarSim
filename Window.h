@@ -10,6 +10,7 @@ class Window{
 		~Window();
 		
 		int getTime();
+		int getRecord();
 		int isOpen();
 		void runWindow();
 		void acceptStudent(int rec);
