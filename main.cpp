@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 #include "GenQ.h"
 
 using namespace std;
@@ -29,18 +30,17 @@ int main(int argc, char ** argv)
 	}
 
 	inputStream.close();
-	inputStream.open(fileName.c_str())
+	inputStream.open(fileName.c_str());
 
 	int fileData[numLines];
+	int arrayPos = 0;
 	while(inputStream >> text)
 	{
-		int arrayPos = 0;
+		cout << text << endl;
 		fileData[arrayPos++] = text;
 	}
 
 	inputStream.close();
-
-	cout << numLines << endl;
 
 	for(int i = 0; i < numLines; ++i)
 	{
