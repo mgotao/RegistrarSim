@@ -13,6 +13,10 @@ Window::~Window(){
 	
 }
 
+int Window::getRecord(){
+	return record;	
+}
+
 int Window::getTime(){
 	return time;	
 }
