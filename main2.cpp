@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
 	}
 
 	int numWindows, globalTime;
-	int numWindows = fileData[0];
+	numWindows = fileData[0];
 
 	int windows[numWindows];
 	for(int i = 0; i < numWindows; ++i) 
@@ -57,25 +57,79 @@ int main(int argc, char ** argv)
 
 	arrayPos = 1;
 	globalTime = 0;
-	GenQ<int> studentQueue();
+	GenQ<int> studentQueue(100);
 	bool queueEmpty = false;
+
+	int totalWindowIdleTime, totalStudentWaitTime, numStudents, totalStudents = 0;
 
 	while(!queueEmpty)
 	{
-		if(fileData[arrayPos] = globalTime)
+		if(fileData[arrayPos] = globalTime) //Checks if the value given for time is equal to the tracked time
 		{
-			numStudents = fileData[++arrayPos];
+			numStudents = fileData[++arrayPos];	//If yes, reads the value of students
+			totalStudents += numStudents;
 			for(int i = 1; i <= numStudents; ++i)
 			{
-				studentQueue.insert(fileData[++arrayPos]);
+				studentQueue.insert(fileData[++arrayPos]);	//Enqueues number of students into the student queue
 			}
 		}
-		for(int i = 0; i < numWindows; ++i){
-			if(registrar[i].isOpen == 1 && studentQueue.isEmpty() == 0){
-				registrar[i].acceptStudent(studentQueue.remove());	//students go into window
+
+		for(int i = 0; i < numWindows; ++i)	//Pops any waiting students into an open window
+		{
+			if(windows[i] = 0)
+			{
+				if(!studentQueue.isEmpty())
+				{
+					windows[i] = studentQueue.remove();
+				}
 			}
 		}
-		for(int i = 0; i < numWindows; ++i) registrar[i].runWindow();	//window op
-		//check if sim should end
-		globatTime++;
+
+		for(int i = 0; i < numWindows; ++i)
+		{
+			if(windows[i] > 0)
+			{
+				windows[i]--;
+			}
+		}
+
+		for(int i = 0; i < numWindows; ++i)
+		{
+			if(windows[i] = 0)
+			{
+				totalWindowIdleTime++;
+			}
+		}
+
+		totalStudentWaitTime += studentQueue.getSize();
+
+		if(arrayPos == numLines - 1)
+		{
+			bool windowsEmpty = true;
+			for(int i = 0; i < numWindows; ++i)
+			{
+				if(windows[i] != 0)
+				{
+					windowsEmpty = false;
+				}
+			}
+			if(windowsEmpty)
+			{
+				if(studentQueue.isEmpty())
+				{
+					queueEmpty = true;
+				}
+			}
+		}
+
+		globalTime++;
 	}
+
+	float meanStudentWaitTime = (float)totalStudentWaitTime/(float)totalStudents;
+	float meanWindowIdleTime = (float)totalWindowIdleTime/5.0f;
+
+	cout << "The mean student wait time is: " << meanStudentWaitTime << " minutes." << endl;
+	cout << "The mean window idle time is: " << meanWindowIdleTime << " minutes." << endl;
+
+	return 0;
+}
