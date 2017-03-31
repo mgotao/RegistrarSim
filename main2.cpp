@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 	}
 
 	arrayPos = 1;
-	globalTime = 1;
+	globalTime = 0;
 	GenQ<int> studentQueue();
 	bool queueEmpty = false;
 
@@ -70,5 +70,12 @@ int main(int argc, char ** argv)
 				studentQueue.insert(fileData[++arrayPos]);
 			}
 		}
+		for(int i = 0; i < numWindows; ++i){
+			if(registrar[i].isOpen == 1 && studentQueue.isEmpty() == 0){
+				registrar[i].acceptStudent(studentQueue.remove());	//students go into window
+			}
+		}
+		for(int i = 0; i < numWindows; ++i) registrar[i].runWindow();	//window op
+		//check if sim should end
+		globatTime++;
 	}
-}
