@@ -49,11 +49,7 @@ int main(int argc, char ** argv)
 	int numWindows, globalTime;
 	numWindows = fileData[0];
 
-	int windows[numWindows];
-	for(int i = 0; i < numWindows; ++i) 
-	{
-		windows[i] = 0;
-	}
+	Window registrar[numWindows];
 
 	arrayPos = 1;
 	globalTime = 0;
@@ -74,24 +70,12 @@ int main(int argc, char ** argv)
 			}
 		}
 
-		for(int i = 0; i < numWindows; ++i)	//Pops any waiting students into an open window
-		{
-			if(windows[i] = 0)
-			{
-				if(!studentQueue.isEmpty())
-				{
-					windows[i] = studentQueue.remove();
-				}
+		for(int i = 0; i < numWindows; ++i){
+			if(registrar[i].isOpen == 1 && studentQueue.isEmpty() == 0){
+				registrar[i].acceptStudent(studentQueue.remove());	//students go into window
 			}
 		}
-
-		for(int i = 0; i < numWindows; ++i)
-		{
-			if(windows[i] > 0)
-			{
-				windows[i]--;
-			}
-		}
+		for(int i = 0; i < numWindows; ++i) registrar[i].runWindow();	
 
 		for(int i = 0; i < numWindows; ++i)
 		{
@@ -108,10 +92,7 @@ int main(int argc, char ** argv)
 			bool windowsEmpty = true;
 			for(int i = 0; i < numWindows; ++i)
 			{
-				if(windows[i] != 0)
-				{
-					windowsEmpty = false;
-				}
+				if(registrar[i].isOpen != 1) windowsEmpty = false;
 			}
 			if(windowsEmpty)
 			{
